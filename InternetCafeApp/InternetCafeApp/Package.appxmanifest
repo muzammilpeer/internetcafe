@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Package xmlns="http://schemas.microsoft.com/appx/2010/manifest">
+  <Identity Name="8789MuzammilPeer.InternetCafe" Publisher="CN=EAC3D6A4-20ED-4CA1-8A29-563B57EC3E59" Version="1.0.0.3" />
+  <Properties>
+    <DisplayName>InternetCafe</DisplayName>
+    <PublisherDisplayName>Muzammil Peer</PublisherDisplayName>
+    <Logo>Assets\StoreLogo.png</Logo>
+  </Properties>
+  <Prerequisites>
+    <OSMinVersion>6.2.1</OSMinVersion>
+    <OSMaxVersionTested>6.2.1</OSMaxVersionTested>
+  </Prerequisites>
+  <Resources>
+    <Resource Language="x-generate" />
+  </Resources>
+  <Applications>
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="InternetCafeApp.App">
+      <VisualElements DisplayName="Internet Cafe" Logo="Assets\Logo.png" SmallLogo="Assets\SmallLogo.png" Description="Internet Cafe Application supported on Desktop and Laptop Machines by default." ForegroundText="light" BackgroundColor="#3dc9e7">
+        <DefaultTile ShowName="allLogos" ShortName="Internet Cafe" />
+        <SplashScreen Image="Assets\SplashScreen.png" />
+      </VisualElements>
+    </Application>
+  </Applications>
+  <Capabilities>
+    <Capability Name="internetClient" />
+  </Capabilities>
+</Package>

@@ -1,0 +1,16 @@
+Assets\Logo.png
+Assets\SmallLogo.png
+Assets\SplashScreen.png
+Assets\StoreLogo.png
+App.xaml
+Common\StandardStyles.xaml
+MainPage.xaml
+View\AddPayment.xaml
+View\AddReservation.xaml
+View\BlankPage1.xaml
+View\ListRecords.xaml
+View\MaintainClient.xaml
+View\MaintainRecord.xaml
+View\MaintainRoom.xaml
+View\Reports.xaml
+View\SqliteSample.xaml

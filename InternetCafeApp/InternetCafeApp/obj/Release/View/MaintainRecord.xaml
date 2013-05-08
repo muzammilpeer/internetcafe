@@ -1,0 +1,102 @@
+﻿ <Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InternetCafeApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:Callisto.Controls"
+    x:Class="InternetCafeApp.View.MaintainRecord"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    mc:Ignorable="d">
+        <Page.Resources>
+            <Style
+            x:Key="ValidationErrorLabelStyle"
+            TargetType="TextBlock">
+                <Setter
+                Property="Foreground"
+                Value="Red" />
+                <Setter
+                Property="FontSize"
+                Value="18" />
+                <Setter
+                Property="Margin"
+                Value="5" />
+            </Style>
+        </Page.Resources>
+    <Grid Background="#3dc9e7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF328918" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:ConnectionId='5' x:Name="backButton"                IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+                <TextBlock x:Name="pageTitle" Text="Maintain Reservation" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+            <TextBlock x:Name="txtTotalRoomCount" Text="{Binding Records.Count}" TextAlignment="Right" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+        </Grid>
+        <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="56" />
+
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Search By Name: "  Grid.Column="0" Grid.Row="0" FontSize="30" IsHitTestVisible="false" TextAlignment="Right"/>
+                <Controls:WatermarkTextBox  Grid.Row="0" FontSize="30"  Grid.Column="1" />
+                <Button Content="Search" Grid.Column="3" Grid.Row="0" FontSize="30"  />
+                <TextBlock Text="Search By Room No"  Grid.Column="4" Grid.Row="0" FontSize="30"  IsHitTestVisible="false"  TextAlignment="Right"/>
+                <ComboBox x:ConnectionId='1' x:Name="searchRoomNo" Grid.Column="5" Grid.Row="0"  ItemsSource="{Binding Rooms}" 
+                          SelectedItem="{Binding SelectedItemRoom, Mode=TwoWay}"
+                          DisplayMemberPath="roomNo"
+                          SelectedValuePath="roomNo"
+                          SelectedValue="{Binding Path=SelectedItemRoom}"                                                  
+                          />
+                <TextBlock Grid.Column="1" Grid.Row="1"  TextWrapping="Wrap"  FontSize="40" Text="Name :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="2"  TextWrapping="Wrap"  FontSize="40" Text="Gender :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="3"   TextWrapping="Wrap" FontSize="40" Text="Check In :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="4"   TextWrapping="Wrap" FontSize="40" Text="Check Out :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="5"   TextWrapping="Wrap" FontSize="40" Text="Room No:" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="6"   TextWrapping="Wrap" FontSize="40" Text="WebCam:" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="7"   TextWrapping="Wrap" FontSize="40" Text="Card Reader:" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="8"   TextWrapping="Wrap" FontSize="40" Text="Status :" TextAlignment="Right" />
+                <Button x:ConnectionId='2' x:Name="btnSave" Grid.Column="1" Grid.Row="9" Content="Save"  Height="68" Width="324" Background="#FF40A009"                      />
+                <Button x:ConnectionId='3' x:Name="btnCancel" Grid.Column="3" Grid.Row="9" Content="Cancel"   Height="68" Width="324"  Background="#FFE40C0C"                        />
+                <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="1" Text="{Binding SelectedItemClient.name}" x:Name="txtName"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+                <ToggleSwitch Grid.Column="3" Grid.Row="2" x:Name="tgGender" IsOn="{Binding SelectedItemClient.gender}" OnContent="Male" OffContent="Female" />
+                <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="3" x:Name="txtCheckIn" Text="{Binding SelectedItemRecord.checkIn}" Height="52" TextWrapping="Wrap"  TextAlignment="Left" FontSize="30"/>
+                <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="4" x:Name="txtCheckOut" Text="{Binding SelectedItemRecord.checkOut}"  Height="52" TextWrapping="Wrap"  TextAlignment="Left" FontSize="30"/>
+                <ComboBox x:ConnectionId='4' x:Name="comboBoxRooms" Grid.Column="3" Height="50" Grid.Row="5"  ItemsSource="{Binding Rooms}" 
+                      SelectedItem="{Binding SelectedItemRoom, Mode=TwoWay}"
+                      DisplayMemberPath="roomNo"
+                      SelectedValuePath="roomNo"
+                      SelectedValue="{Binding Path=SelectedItemRoom}"                                                  
+                      />
+                <CheckBox Grid.Column="3" Grid.Row="6" x:Name="chkWebCam" IsChecked="{Binding SelectedItemRecord.isWebCam}"  />
+                <CheckBox Grid.Column="3" Grid.Row="7" x:Name="chkCardReader"  IsChecked="{Binding SelectedItemRecord.isCardReader}"  />
+                <CheckBox Grid.Column="3" Grid.Row="8" x:Name="chkStatus"  IsChecked="{Binding SelectedItemRecord.active}" />
+
+            </Grid>
+        </Grid>
+    </Page>
+

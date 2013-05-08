@@ -1,0 +1,87 @@
+﻿<Page
+    x:Class="InternetCafeApp.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InternetCafeApp"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Grid Background="{StaticResource ApplicationPageBackgroundThemeBrush}" Width="Auto">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF4C98CD" >
+        </Grid>
+        <Grid Grid.Row="1"  Background="#FFE46922">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="200"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid Background="Aqua" Grid.Column="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button x:ConnectionId='3' x:Name="btnAddReservation" Grid.Column="0" Content="Add Reservation"   Height="150" Background="#FF696795"                              Width="200"/>
+                <Button x:ConnectionId='4' x:Name="btnAddPayment" Grid.Column="1" Content="Add Payment"  Height="150" Background="#FF696795"                              Width="200"/>
+                <Button x:ConnectionId='5' x:Name="btnReport" Grid.Column="2" Content="Report" Height="150" Background="#FF696795"                         Width="200"/>
+                <Button x:ConnectionId='6' x:Name="btnMntRooms" Grid.Column="3"  Content="Maintain Rooms"  Height="150" Background="#FF696795"                            Width="200" RenderTransformOrigin="2.495,2.293"/>
+                <Button x:ConnectionId='7' x:Name="btnMntRecord" Grid.Column="4" Content="Maintain Records" Height="150" Background="#FF696795" Width="200"                             />
+            </Grid>
+            <ListBox x:Name="listRooms" Grid.Column="1" HorizontalAlignment="Left" Height="334" Margin="56,93,0,0" Grid.Row="1" VerticalAlignment="Top" Width="508" RenderTransformOrigin="-0.44,-0.94" ItemsSource="{Binding Rooms}"
+                SelectedItem="{Binding SelectedItem, 
+                   Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="40"/>
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Grid.Column="0"  Text="{Binding roomNo}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="1"  Text=" | "/>
+                            <TextBlock Grid.Row="0" Grid.Column="2" Text="{Binding ipaddress}"/>
+                            <TextBlock Grid.Row="0" Grid.Column="3"  Text=" | "/>
+                            <TextBlock Grid.Row="0" Grid.Column="4" Text="{Binding computerDescription}" />
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="830,22,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Summary Overview" VerticalAlignment="Top" Height="39" Width="270" FontSize="30"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="55,21,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Rooms Status" VerticalAlignment="Top" Height="40" Width="264" FontSize="30"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="876,90,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Total Number of Rooms :" VerticalAlignment="Top"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="1011,89,0,0" Grid.Row="1" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="49"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="876,120,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Total Number of Rooms :" VerticalAlignment="Top"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="878,150,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Total Number of Rooms :" VerticalAlignment="Top"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="882,182,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Total Number of Rooms :" VerticalAlignment="Top"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="1021,125,0,0" Grid.Row="1" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="49"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="1013,151,0,0" Grid.Row="1" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="49"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="1027,177,0,0" Grid.Row="1" TextWrapping="Wrap" Text="100" VerticalAlignment="Top" Width="49"/>
+            <TextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Margin="878,208,0,0" Grid.Row="1" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top"/>
+            <RichTextBlock Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="100" Margin="954,211,0,0" Grid.Row="1" VerticalAlignment="Top" Width="278" Foreground="#E5000000">
+
+            </RichTextBlock>
+            <TextBlock Grid.ColumnSpan="2" Margin="440,425,0,0" Grid.Row="1" TextWrapping="Wrap" Width="435" Text="TriadsLabs 2013. All rights reserved." FontSize="25" Height="31" HorizontalAlignment="Center" VerticalAlignment="Bottom"/>
+            <Button x:ConnectionId='1' Grid.ColumnSpan="2" Content="Delete" HorizontalAlignment="Left" Margin="696,310,0,0" Grid.Row="1" VerticalAlignment="Top"                     />
+            <Button x:ConnectionId='2' x:Name="btnMaintainClient" Grid.ColumnSpan="2" Content="Button" HorizontalAlignment="Left" Margin="1148,80,0,0" Grid.Row="1" VerticalAlignment="Top" Width="186" Height="162"                                />
+        </Grid>
+
+    </Grid>
+</Page>
+

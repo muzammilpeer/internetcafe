@@ -1,0 +1,142 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InternetCafeApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:Callisto.Controls"
+    xmlns:Rtcontrols="using:WinRTXamlToolkit.Controls"
+    x:Class="InternetCafeApp.View.MaintainRoom"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <Style
+            x:Key="ValidationErrorLabelStyle"
+            TargetType="TextBlock">
+            <Setter
+                Property="Foreground"
+                Value="Red" />
+            <Setter
+                Property="FontSize"
+                Value="18" />
+            <Setter
+                Property="Margin"
+                Value="5" />
+        </Style>
+
+
+    </Page.Resources>
+
+    <Grid Background="#3dc9e7">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="50" />
+            <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Background="#FF328918" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button x:Name="backButton" Click="GoBack" IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+            <TextBlock x:Name="pageTitle" Text="Maintain Rooms" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+            <TextBlock x:Name="txtTotalRoomCount" Text="{Binding Rooms.Count}" TextAlignment="Right" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="40" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+                <RowDefinition Height="56" />
+
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <TextBlock Text="Room No"  Grid.Row="1" Grid.Column="1"  IsHitTestVisible="false" FontSize="40" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Grid.Row="2"   TextWrapping="Wrap"  FontSize="40" Text="Room Number  :" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Grid.Row="3"   TextWrapping="Wrap"  FontSize="40" Text="Ip Address :" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Grid.Row="4"   TextWrapping="Wrap" FontSize="30" Text="Computer Description :" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Grid.Row="5"   TextWrapping="Wrap" FontSize="40" Text="Remarks  :" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Grid.Row="6"   TextWrapping="Wrap" FontSize="40" Text="Active :" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Grid.Row="7"   TextWrapping="Wrap" FontSize="40" Text="Current Status:" TextAlignment="Right" />
+            <TextBlock Grid.Column="1" Grid.Row="8"   TextWrapping="Wrap" FontSize="40" Text="Modified Date :" TextAlignment="Right" />
+
+            <Button x:Name="btnSave" Grid.Column="1" Grid.Row="9" Content="Save"  Height="68" Width="324" Background="#FF40A009" Click="btnSave_Click"/>
+            <Button x:Name="btnCancel" Grid.Column="3" Grid.Row="9" Content="Cancel"   Height="68" Width="324"  Background="#FFE40C0C" Click="btnCancel_Click"/>
+            
+            <ComboBox x:Name="comboBoxRooms" Grid.Column="3" Grid.Row="1"  ItemsSource="{Binding Rooms}" 
+                      SelectedItem="{Binding SelectedItemRoom, Mode=TwoWay}"
+                      DisplayMemberPath="roomNo"
+                      SelectedValuePath="roomNo"
+                      SelectedValue="{Binding Path=SelectedItemRoom}" SelectionChanged="comboBoxRooms_SelectionChanged"
+                      />
+
+            <Controls:WatermarkTextBox  Grid.Column="3" Grid.Row="2" Name="txtRoomNo"  Text="{Binding SelectedItemRoom.roomNo, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"  extensions:FieldValidationExtensions.Format="Numeric" />
+            <TextBlock  Grid.Column="4" Grid.Row="2"
+                Style="{StaticResource ValidationErrorLabelStyle}"
+                Text="{Binding (extensions:FieldValidationExtensions.ValidationMessage), ElementName=txtRoomNo}"
+                Visibility="{Binding (extensions:FieldValidationExtensions.ValidationMessageVisibility), ElementName=txtRoomNo}" />
+            <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="3" Name="txtIpAddress"  Text="{Binding SelectedItemRoom.ipaddress, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+            <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="4" Name="txtComputerDesc"  Text="{Binding SelectedItemRoom.computerDescription, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+            <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="5" Name="txtRemarks"  Text="{Binding SelectedItemRoom.remarks, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+            <CheckBox Grid.Column="3" Grid.Row="6" x:Name="chkActive"  IsChecked="{Binding SelectedItemRoom.active, Mode=TwoWay}" />
+            <CheckBox Grid.Column="3" Grid.Row="7" x:Name="chkCardReader" IsChecked="{Binding SelectedItemRoom.isAvailable, Mode=TwoWay}" IsEnabled="False" IsTapEnabled="False" IsDoubleTapEnabled="False" />
+            <TextBlock Grid.Column="3" Grid.Row="8" Name="txtModDate"  TextWrapping="Wrap" FontSize="40" Text="{Binding SelectedItemRoom.modDate, Mode=TwoWay}" />
+            <Controls:CustomDialog  Content="CustomDialog" Grid.Column="4" HorizontalAlignment="Left" Height="126" Margin="32,12,0,0" Grid.Row="8" Grid.RowSpan="3" VerticalAlignment="Top" Width="252"/>
+            
+        </Grid>
+        <Grid Grid.Row="2" Background="#99FF0000">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Message :" Grid.Column="0" FontSize="30" />
+            <TextBlock Name="txtMessageBar" Text="No Message Yet" Grid.Column="1" FontSize="30" />
+        </Grid>
+        <Grid Grid.Row="3" Background="#FFB00505" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="© 2013 TriadsLabs. All Right Reserved." FontFamily="Gautami" FontSize="40" Grid.Column="1" IsHitTestVisible="false" TextAlignment="Center"/>
+        </Grid>
+
+
+
+
+
+
+
+
+    </Grid> 
+    <Page.BottomAppBar>
+        <AppBar x:Name="bottomAppBar" Padding="10,0,10,0">
+            <Grid>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Button Style="{StaticResource EditAppBarButtonStyle}" Name="btnEdit" Click="btnEdit_Click"/>
+                    <Button Style="{StaticResource RemoveAppBarButtonStyle}" Name="btnRemove" Click="btnRemove_Click"/>
+                    <Button Style="{StaticResource AddAppBarButtonStyle}" Name="btnAdd" Click="btnAdd_Click"/>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Style="{StaticResource RefreshAppBarButtonStyle}" Name="btnRefresh" Click="btnRefresh_Click"/>
+                    <Button Style="{StaticResource HelpAppBarButtonStyle}" Name="btnHelp" Click="btnHelp_Click"/>
+                </StackPanel>
+            </Grid>
+        </AppBar>
+    </Page.BottomAppBar>
+</Page>

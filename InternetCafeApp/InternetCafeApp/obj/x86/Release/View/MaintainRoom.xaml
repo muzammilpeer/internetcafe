@@ -1,0 +1,104 @@
+﻿<Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InternetCafeApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:Callisto.Controls"
+    x:Class="InternetCafeApp.View.MaintainRoom"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    mc:Ignorable="d">
+    <Page.Resources>
+        <Style
+            x:Key="ValidationErrorLabelStyle"
+            TargetType="TextBlock">
+        <Setter
+                Property="Foreground"
+                Value="Red" />
+        <Setter
+                Property="FontSize"
+                Value="18" />
+        <Setter
+                Property="Margin"
+                Value="5" />
+    </Style>
+    </Page.Resources>
+    <Grid Background="#FFE46922">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#FF328918" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Button x:ConnectionId='4' x:Name="backButton"                IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+                <TextBlock x:Name="pageTitle" Text="Maintain Rooms" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+                <TextBlock x:Name="txtTotalRoomCount" Text="{Binding Rooms.Count}" TextAlignment="Right" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+        </Grid>
+            <Grid Grid.Row="1" Background="#FF3895C1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+
+                <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="Room No" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+                <TextBlock Grid.Column="1" Grid.Row="1"   TextWrapping="Wrap"  FontSize="40" Text="Room Number  :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="2"   TextWrapping="Wrap"  FontSize="40" Text="Ip Address :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="3"   TextWrapping="Wrap" FontSize="30" Text="Computer Description :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="4"   TextWrapping="Wrap" FontSize="40" Text="Remarks  :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="5"   TextWrapping="Wrap" FontSize="40" Text="Active :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="6"   TextWrapping="Wrap" FontSize="40" Text="Current Status:" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="7"   TextWrapping="Wrap" FontSize="40" Text="Modified Date :" TextAlignment="Right" />
+                
+                <Button x:ConnectionId='1' x:Name="btnSave" Grid.Column="1" Grid.Row="8" Content="Save"  Height="68" Width="324" Background="#FF40A009"                      />
+                <Button x:ConnectionId='2' x:Name="btnCancel" Grid.Column="3" Grid.Row="8" Content="Cancel"   Height="68" Width="324"  Background="#FFE40C0C"                        />
+
+                <ComboBox x:ConnectionId='3' x:Name="comboBoxRooms" Grid.Column="3" Height="50" Grid.Row="0"  ItemsSource="{Binding Rooms}" 
+                      SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                      DisplayMemberPath="roomNo"
+                      SelectedValuePath="roomNo"
+                      SelectedValue="{Binding Path=SelectedItemRoom}"                                                  
+                      />
+
+            <Controls:WatermarkTextBox  Grid.Column="3" Grid.Row="1" Name="txtRoomNo"  Text="{Binding SelectedItemRoom.roomNo, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"  extensions:FieldValidationExtensions.Format="Numeric" />
+            <TextBlock  Grid.Column="4" Grid.Row="1"
+                Style="{StaticResource ValidationErrorLabelStyle}"
+                Text="{Binding (extensions:FieldValidationExtensions.ValidationMessage), ElementName=txtRoomNo}"
+                Visibility="{Binding (extensions:FieldValidationExtensions.ValidationMessageVisibility), ElementName=txtRoomNo}" />
+            <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="2" Name="txtIpAddress"  Text="{Binding SelectedItemRoom.ipaddress, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+            <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="3" Name="txtComputerDesc"  Text="{Binding SelectedItemRoom.computerDescription, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+            <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="4" Name="txtRemarks"  Text="{Binding SelectedItemRoom.remarks, Mode=TwoWay}"  Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+            <CheckBox Grid.Column="3" Grid.Row="5" x:Name="chkActive"  IsChecked="{Binding SelectedItemRoom.active, Mode=TwoWay}" />
+            <CheckBox Grid.Column="3" Grid.Row="6" x:Name="chkCardReader" IsChecked="{Binding SelectedItemRoom.isAvailable, Mode=TwoWay}" IsEnabled="False" IsTapEnabled="False" IsDoubleTapEnabled="False" />
+            <TextBlock Grid.Column="3" Grid.Row="7"   TextWrapping="Wrap" FontSize="40" Text="{Binding SelectedItemRoom.modDate, Mode=TwoWay}" />
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Message :" Grid.Column="0" FontSize="30" />
+            <TextBlock Name="txtMessageBar" Text="No Message Yet" Grid.Column="1" FontSize="30" />
+        </Grid>
+    </Grid>
+    </Page>
+

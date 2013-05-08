@@ -1,0 +1,116 @@
+﻿    <Page
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:InternetCafeApp.View"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="using:Callisto.Controls"
+    x:Class="InternetCafeApp.View.AddPayment"
+    xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+    mc:Ignorable="d">
+        <Page.Resources>
+            <Style
+            x:Key="ValidationErrorLabelStyle"
+            TargetType="TextBlock">
+                <Setter
+                Property="Foreground"
+                Value="Red" />
+                <Setter
+                Property="FontSize"
+                Value="18" />
+                <Setter
+                Property="Margin"
+                Value="5" />
+            </Style>
+        </Page.Resources>
+        <Grid Background="#3dc9e7">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="100" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="50" />
+                <RowDefinition Height="50" />
+        </Grid.RowDefinitions>
+            <Grid Grid.Row="0" Background="#FF328918" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+                <Button x:ConnectionId='4' x:Name="backButton"                IsEnabled="{Binding Frame.CanGoBack, ElementName=pageRoot}" Style="{StaticResource BackButtonStyle}"/>
+                <TextBlock x:Name="pageTitle" Text="Add Payment" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+                <TextBlock x:Name="txtTotalRoomCount" Text="{Binding RecordsInt.Count}" TextAlignment="Right" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="3" IsHitTestVisible="false"/>
+
+        </Grid>
+            <Grid Grid.Row="1" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="90" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+                    <RowDefinition Height="56" />
+
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <TextBlock Text="" Style="{StaticResource PageHeaderTextStyle}" Grid.Column="1" IsHitTestVisible="false"/>
+                <TextBlock Grid.Column="1" Grid.Row="1"   TextWrapping="Wrap" FontSize="40" Text="Room No:" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="2"  TextWrapping="Wrap"  FontSize="40" Text="Name :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="3"  TextWrapping="Wrap"  FontSize="40" Text="Gender :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="4"   TextWrapping="Wrap" FontSize="40" Text="Check In :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="5"   TextWrapping="Wrap" FontSize="40" Text="Check Out :" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="6"   TextWrapping="Wrap" FontSize="40" Text="Total Amount" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="7"   TextWrapping="Wrap" FontSize="40" Text="Recieved Amount:" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="8"   TextWrapping="Wrap" FontSize="40" Text="Card Reader:" TextAlignment="Right" />
+                <TextBlock Grid.Column="1" Grid.Row="9"   TextWrapping="Wrap" FontSize="40" Text="WebCam :" TextAlignment="Right" />
+                <Button x:ConnectionId='1' x:Name="btnSave" Grid.Column="1" Grid.Row="10" Content="Save"  Height="68" Width="324" Background="#FF40A009"                      />
+                <Button x:ConnectionId='2' x:Name="btnCancel" Grid.Column="3" Grid.Row="10" Content="Cancel"   Height="68" Width="324"  Background="#FFE40C0C"                        />
+                <ComboBox x:ConnectionId='3' x:Name="comboBoxRooms" Grid.Column="3" Height="50" Grid.Row="1"  ItemsSource="{Binding RecordsInt}" 
+                              SelectedItem="{Binding SelectedItemRecordInt, Mode=TwoWay}"
+                              DisplayMemberPath="roomNo"
+                              SelectedValuePath="roomNo"
+                              SelectedValue="{Binding Path=SelectedItemRecordInt}"                                                    
+                              />
+                <TextBlock Grid.Column="3" Grid.Row="2" x:Name="txtName" Text="{Binding SelectedItemRecordInt.name}" Height="52" TextWrapping="Wrap" TextAlignment="Left" FontSize="30"/>
+                <ToggleSwitch Grid.Column="3" Grid.Row="3" IsEnabled="False" x:Name="tgGender" IsOn="{Binding SelectedItemRecordInt.gender}" OnContent="Male" OffContent="Female" />
+                <TextBlock Grid.Column="3" Grid.Row="4" x:Name="txtCheckIn" Text="{Binding SelectedItemRecordInt.checkIn}" Height="52" TextWrapping="Wrap"  TextAlignment="Left" FontSize="30"/>
+                <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="5" x:Name="txtCheckOut" Text="Current Time" IsEnabled="False"  Height="52" TextWrapping="Wrap"  TextAlignment="Left" FontSize="30"/>
+                <TextBlock Grid.Column="5" Grid.Row="5" x:Name="txtTotalTime" Text="" Height="52" TextWrapping="Wrap"  TextAlignment="Left" FontSize="30"/>
+                <TextBlock Grid.Column="3" Grid.Row="6" x:Name="txtTotalAmount" Text="{Binding SelectedItemRecordInt.totalAmount}"  Height="52" TextWrapping="Wrap"  TextAlignment="Left" FontSize="30"/>
+                <Controls:WatermarkTextBox Grid.Column="3" Grid.Row="7" x:Name="txtRecievedAmount" Text="{Binding SelectedItemRecordInt.recievedAmount}"  Height="52" TextWrapping="Wrap"  TextAlignment="Left" FontSize="30"/>
+                <CheckBox Grid.Column="4" Grid.Row="8" x:Name="rchkCardReader" Content="Returned" IsChecked="{Binding SelectedItemRecordInt.isCardReader}"  />
+                <CheckBox Grid.Column="3" Grid.Row="8" IsEnabled="False" x:Name="chkCardReader"  IsChecked="{Binding SelectedItemRecordInt.isCardReader}"  />
+                <CheckBox Grid.Column="3" Grid.Row="9" IsEnabled="False" x:Name="chkWebCam" IsChecked="{Binding SelectedItemRecordInt.isWebCam}"  />
+                <CheckBox Grid.Column="4" Grid.Row="9" x:Name="rchkWebCam" Content="Returned" IsChecked="{Binding SelectedItemRecordInt.isWebCam}"  />
+
+        </Grid>
+        <Grid Grid.Row="2" Background="#99FF0000">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="Message :" Grid.Column="0" FontSize="30" />
+            <TextBlock Name="txtMessageBar" Text="No Message Yet" Grid.Column="1" FontSize="30" />
+        </Grid>
+        <Grid Grid.Row="3" Background="#FFB00505" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="© 2013 TriadsLabs. All Right Reserved." FontFamily="Gautami" FontSize="40" Grid.Column="1" IsHitTestVisible="false" TextAlignment="Center"/>
+        </Grid>
+    </Grid>
+    </Page>
+
